@@ -1,0 +1,54 @@
+#!/bin/sh
+# http://marius.scurtescu.com/
+
+# Licence : GNU GPL
+
+# Dependency
+#		mogrify (in imagemagick)
+#		zenity
+# based on
+#       ImageTool cteated by Chris Wilson
+#       http://blixtra.org/blog/installing-nautilus-scripts/
+
+TITLE="Resize Image(s)"
+
+if [ $# == 0 ] ; then
+  zenity --error --title="$TITLE" --text="Please select at least one image."
+  exit 2
+fi
+
+which mogrify 2>/dev/null
+if [ $? != 0 ] ; then
+	zenity --error --title="$TITLE" --text="mogrify not found, please install Imagemagick."
+	exit 1
+fi
+
+RESIZE_TO=`zenity --list --title "$TITLE" --height=235 \
+    --text "Select new size:" \
+    --radiolist --column="" \
+	--column="Size" FALSE 160 TRUE 640 FALSE 800 FALSE 1200 FALSE 1600`
+
+if [ $? != 0 ] ; then
+    exit 0
+fi
+
+progress=0
+counter=1
+
+(for i in "$@"
+  ##echoed strings starting with "#" are used as text in the the progress window
+  ##echoed integers are used as the percentage for the progress bar
+  do
+    echo $progress
+    
+    echo "#Processing image `basename \"${i}\"` ($counter/$#)"
+    
+    mogrify -resize "${RESIZE_TO}x${RESIZE_TO}" "$i"
+    
+    ((progress = $counter*100/$#)) 
+    ((counter+=1))
+  done
+  echo 100
+  echo "#Done") | zenity --progress --title="$TITLE" --text="Processing image ..." --percentage=${progress}
+
+exit 0

@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Author: Marius Scurtescu
+#         http://marius.scurtescu.com
+#
+# Copyright: (c) Marius Scurtescu
+# License: GNU GPL (http://www.gnu.org/copyleft/gpl.html)
+#
+# Dependencies: Nautilus, meld
+#
+# Install:
+#  - copy to ~/.gnome2/nautilus-scripts/
+#
+# Usage:
+#  - select 1 (a cvs/svn managed file or folder), 2 or 3 (for 3 way comparison) files in Nautilus
+#  - right click the files and select Scripts / Diff
+#
+# Version 1.0, November 16, 2005
+# first public release
+#
+
+if [ -z `which meld` ] ; then
+    zenity --error --text="meld not found!
+
+Please install meld."
+    exit 1
+fi
+
+if [ $# -eq 0 ] ; then
+    meld .
+    exit
+fi
+
+meld $1 $2 $3
+
