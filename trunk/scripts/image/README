@@ -1,0 +1,36 @@
+README
+======
+
+Home page: http://marius.scurtescu.com/
+Version: 0.9
+
+This is a collection of shell scripts designed for use with Nautilus that
+allow batch manipulation of images. Supported operations are resizing,
+rotating and renaming.
+
+See the INSTALL file for installation instructions.
+
+Limitations
+-----------
+
+Recursing into subfolders is not supported.
+
+Also, only images selected in one single folder will work properly.
+
+Since auto rotation and renaming are using jhead only jpeg files are
+supported for these operations. The other operations can be applied to
+any images supported by ImageMagick.
+
+
+Credits
+=======
+
+Resize is based on ImageTool and Rotate is based on both ImageTool and
+Rotate-Mirror_pictures.
+
+ ImageTool cteated by Chris Wilson
+ http://blixtra.org/blog/installing-nautilus-scripts/
+
+ Rotate-Mirror_pictures by yeKcim 
+ http://yeknan.free.fr/blog/index.php?2006/03/12/71-rotate-mirror_pictures-03
+ http://g-scripts.sourceforge.net/cat-multimedia.php#image
