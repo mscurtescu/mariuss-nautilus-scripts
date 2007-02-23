@@ -31,5 +31,5 @@ if [ $# -eq 0 ] ; then
     exit
 fi
 
-meld $1 $2 $3
+meld $NAUTILUS_SCRIPT_SELECTED_FILE_PATHS
 
