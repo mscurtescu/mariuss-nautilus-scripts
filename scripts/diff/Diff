@@ -31,5 +31,11 @@ if [ $# -eq 0 ] ; then
     exit
 fi
 
-meld $NAUTILUS_SCRIPT_SELECTED_FILE_PATHS
+if [ $# -gt 3 ] ; then
+    zenity --error --text="meld supports maximum 3 arguments!"
+    exit 2
+fi
 
+IFS=$'\n'
+
+meld $NAUTILUS_SCRIPT_SELECTED_FILE_PATHS
